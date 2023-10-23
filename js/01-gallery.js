@@ -30,17 +30,15 @@ galleryContainer.addEventListener("click", (event) => {
     {
         closable : true,
         onShow : () => {
+            console.log("add");
             document.addEventListener("keydown", OnEscapeKeyDown)
-        },
-        OnClose : () => {
-            document.removeEventListener("keydown", OnEscapeKeyDown)
         }
     });  
     
     function OnEscapeKeyDown(event) {
         console.log(event.code);
         if (event.code === "Escape") {
-            instance.close();
+            instance.close(() => { document.removeEventListener("keydown", OnEscapeKeyDown); });
         }
     }              
 
